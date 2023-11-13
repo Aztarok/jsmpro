@@ -1,9 +1,11 @@
 
+import Header from "@/components/Header";
 import ResourceCard from "@/components/ResourceCard"
 import SearchForm from "@/components/SearchForm"
 import Filters from "@/components/ui/Filters"
 import { getResources } from "@/sanity/actions"
-import React from 'react'
+
+export const revalidate = 900;
 
 const  Page = async () => {
     const resources = await getResources({
@@ -13,7 +15,8 @@ const  Page = async () => {
     })
 
     console.log(resources);
-    
+    let Resources = resources.reverse();
+    console.log(Resources)
     return (
         <main className="flex-center paddings mx-auto w-full max-w-screen-2xl flex-col">
             <section className="nav-padding w-full">
@@ -25,7 +28,7 @@ const  Page = async () => {
             </section>
             <Filters />
             <section className="flex-center mt-6 w-full flex-col sm:mt-20">
-                Header
+                <Header />
                 <div className="mt-12 flex w-full flex-wrap justify-center gap-16 sm:justify-start">
                     {resources?.length > 0 ? (resources.map((resource: any) => (
                         <ResourceCard key={resource._id} title={resource.title} id={resource._id} image={resource.image} downloadNumber={resource.views} />))
