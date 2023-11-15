@@ -2,21 +2,26 @@
 import Header from "@/components/Header";
 import ResourceCard from "@/components/ResourceCard"
 import SearchForm from "@/components/SearchForm"
-import Filters from "@/components/ui/Filters"
+import Filters from "@/components/Filters"
 import { getResources } from "@/sanity/actions"
 
 export const revalidate = 900;
 
-const  Page = async () => {
+interface Props {
+    searchParams: { [key: string]: string | undefined }
+}
+
+const  Page = async ({ searchParams }: Props) => {
     const resources = await getResources({
         query: "",
-        category: "",
+        category: searchParams?.category || "",
         page: "1"
     })
 
-    console.log(resources);
-    let Resources = resources.reverse();
-    console.log(Resources)
+    console.log(resources)
+    resources.reverse();
+    console.log(resources)
+
     return (
         <main className="flex-center paddings mx-auto w-full max-w-screen-2xl flex-col">
             <section className="nav-padding w-full">
