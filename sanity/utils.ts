@@ -31,8 +31,8 @@ export function buildQuery(params: BuildQueryParams) {
 
 interface UrlQueryParams {
     params: string;
-    key: string;
-    value: string | null;
+    key?: string;
+    value?: string | null;
     keysToRemove?: string[];
 }
 
@@ -41,8 +41,8 @@ export function formUrlQuery({ params, key, value, keysToRemove }: UrlQueryParam
 
     if (keysToRemove) {
         keysToRemove.forEach((keyToRemove) => {
-            delete currentUrl[keyToRemove]
-        });
+            delete currentUrl[keyToRemove];
+        })
     } else if (key && value) {
         currentUrl[key] = value;
     }
