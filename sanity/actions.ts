@@ -11,7 +11,7 @@ interface GetResourcesParams {
 export const getResourcesPlaylist = async () => {
     try {
         const resources = await readClient.fetch(
-            groq`*[_type == "resourcePlaylist"{
+            groq`*[_type == "resourcePlaylist"]{
                 _id,
                 title,
                 resources[0...6]->{
@@ -24,13 +24,13 @@ export const getResourcesPlaylist = async () => {
                     category
                 }
             }`
-        )
+        );
 
         return resources;
     } catch (error) {
-        console.log(error)
+        console.log(error);
     }
-}
+};
 
 export const getResources = async (params: GetResourcesParams) => {
     const { query, category, page } = params;
@@ -41,8 +41,7 @@ export const getResources = async (params: GetResourcesParams) => {
                 type: "resource",
                 query,
                 category,
-                page: parseInt(page),
-
+                page: parseInt(page)
             })}{
                 title,
                 _id,
@@ -52,10 +51,10 @@ export const getResources = async (params: GetResourcesParams) => {
                 slug,
                 category
             }`
-        )
+        );
 
         return resources;
     } catch (error) {
-        console.log(error)
+        console.log(error);
     }
-}
+};
